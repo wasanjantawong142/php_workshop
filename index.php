@@ -5,8 +5,8 @@
     require_once "./database.php";
     $db = new database;
     $conn = $db->connect_db();
-    echo "<pre>";
-    print_r($conn);
+    // echo "<pre>";
+    // print_r($conn);
 ?>
 
 <body>
