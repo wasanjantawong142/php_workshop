@@ -45,7 +45,7 @@ $dataAccount = $db->listUser();
 
                             <td>
                                 <button type="button" class="btn btn-warning edit_data" id="<?= $value['user_id'] ?>" data-toggle="modal" data-target="#EditModal">แก้ไข</button>
-                                <button type=" button" class="btn btn-danger">ลบ</button>
+                                <a href="adminAccountManageDel.php?userId=<?= $value['user_id'] ?>"><button type="button" class="btn btn-danger">ลบ</button></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>

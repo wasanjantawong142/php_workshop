@@ -101,7 +101,7 @@ class database
     {
         $conn = $this->connect_db();
 
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT * FROM user WHERE user_status = '1'";
         $query = mysqli_query($conn, $sql);
 
         $result = array();
@@ -117,7 +117,18 @@ class database
     {
         $conn = $this->connect_db();
 
-        $sql = "UPDATE `user` SET `firstname` = '$firstname', `lastname` = '$lastname', `address` = '$address', `phone_no` = $phone_no WHERE `user`.`user_id` = '$user_id'";
+        $sql = "UPDATE `user` SET `firstname` = '$firstname', `lastname` = '$lastname', `address` = '$address', `phone_no` = '$phone_no' WHERE `user`.`user_id` = '$user_id'";
+        $query = mysqli_query($conn, $sql);
+
+        if ($query) return $query;
+        else return 0;
+    }
+
+    public function delUser($user_id)
+    {
+        $conn = $this->connect_db();
+
+        $sql = "UPDATE `user` SET `user_status` = '$user_id' WHERE `user`.`user_id` = '$user_id'";
         $query = mysqli_query($conn, $sql);
 
         if ($query) return $query;
