@@ -69,7 +69,7 @@ class database
 
         $sql = "SELECT * FROM product";
         $query = mysqli_query($conn, $sql);
-        $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+        $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
         if ($result) return $result;
         else return 0;
     }

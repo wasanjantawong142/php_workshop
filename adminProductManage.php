@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
-<?php include "./component/adminHead.php" ?>
+<?php 
+include "./component/adminHead.php";
+require_once("./database.php");
+$db = new database;
+$infor_product = $db->listProduct();
+// print_r($infor_product);
+?>
 
 <body>
     <div class="d-flex" id="wrapper">
@@ -26,35 +32,33 @@
                             <th scope="col">รูปภาพ</th>
                             <th scope="col">ราคา</th>
                             <th scope="col">จำนวน</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>กางเกงยีนขายาว</td>
-                            <td>Lee</td>
-                            <td>AP-565656</td>
-                            <td>ดำ</td>
-                            <td>L</td>
-                            <td>img-746213213.jpg</td>
-                            <td>1895</td>
-                            <td>24</td>
-
-                            <td style="margin-right:0px;"><button type="button" class="btn btn-warning"
-                                    data-toggle="modal" data-target="#EditModal">แก้ไข</button>
-                            </td>
-                            <td><button type=" button" class="btn btn-danger">ลบ</button>
-                            </td>
-
-
-                        </tr>
-
+                        <?php
+                        $i = 1;
+                        foreach ($infor_product as $row) {
+                            echo "<tr>";
+                            echo "<th scope=row>$i</th>";
+                            echo "<td>" . $row['product_name'] . "</td>";
+                            echo "<td>" . $row['brand'] . "</td>";
+                            echo "<td>" . $row['type'] . "</td>";
+                            echo "<td>" . $row['color'] . "</td>";
+                            echo "<td>" . $row['size'] . " </td>";
+                            echo "<td>" . $row['picture'] . " </td>";
+                            echo "<td>" . $row['price'] . "</td>";
+                            echo "<td>" . $row['qty'] . " </td>";
+                            echo "<td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#EditModal'>แก้ไข</button></td>";
+                            echo "<td><button type='button' class='btn btn-danger'>ลบ</button></td>";
+                            echo "</tr>";
+                            $i++;
+                        }
+                        ?>
                     </tbody>
                 </table>
-                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog " aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog" role=" document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลสินค้า</h5>
@@ -65,7 +69,7 @@
                             <div class="modal-body">
                                 <form>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md- 6">
                                             <label for="inputEmail4">ชื่อสินค้า</label>
                                             <input type="text" class="form-control" name="pName" placeholder="Email">
                                         </div>
@@ -78,7 +82,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">รุ่น</label>
-                                            <input type="text" class="form-control" name="pType" placeholder="Email">
+                                            <input type="text" class="form-control" name="pType " placeholder="Email">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState">ไซต์</label>
@@ -98,7 +102,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">ราคา</label>
-                                            <input type="text" class="form-control" name="pPrice" placeholder="Email">
+                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">จำนวน</label>
@@ -121,12 +125,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="CreateProduct" tabindex="-1" role="dialog"
+                <div class="modal fade" id="CreateProduct" tabindex="-1" role="dialog "
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog" role=" document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="CreateProduct">เพิ่มข้อมูลสินค้า</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลสินค้า</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -134,20 +138,20 @@
                             <div class="modal-body">
                                 <form>
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md- 6">
                                             <label for="inputEmail4">ชื่อสินค้า</label>
-                                            <input type="text" class="form-control" name="pName"
-                                                placeholder="ชื่อสินค้า">
+                                            <input type="text" class="form-control" name="pName" placeholder="Email">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">แบรนด์</label>
-                                            <input type="text" class="form-control" name="pBrand" placeholder="แบรนด์">
+                                            <input type="text" class="form-control" name="pBrand"
+                                                placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">รุ่น</label>
-                                            <input type="text" class="form-control" name="pType" placeholder="รุ่น">
+                                            <input type="text" class="form-control" name="pType " placeholder="Email">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState">ไซต์</label>
@@ -161,17 +165,17 @@
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">สี</label>
-                                            <input type="text" class="form-control" name="pColor" placeholder="สี">
+                                            <input type="text" class="form-control" name="pColor" placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">ราคา</label>
-                                            <input type="text" class="form-control" name="pPrice" placeholder="ราคา">
+                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">จำนวน</label>
-                                            <input type="text" class="form-control" name="pQty" placeholder="จำนวน">
+                                            <input type="text" class="form-control" name="pQty" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -190,11 +194,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- content -->
 
+                <!-- content -->
+
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
