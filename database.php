@@ -76,10 +76,10 @@ class database
 
 
 }
-    $db = new database;
-    echo "<pre>";
-    // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
-    // print_r($db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
-    print_r($db->listProduct());
+    // $db = new database;
+    // echo "<pre>";
+    // // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
+    // // print_r($db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
+    // print_r($db->listProduct());
     
     ?>
