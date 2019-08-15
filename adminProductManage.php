@@ -1,238 +1,204 @@
 <!doctype html>
 <html lang="en">
-<?php include "./component/adminHead.php"  ?>
+<?php 
+include "./component/adminHead.php";
+require_once("./database.php");
+$db = new database;
+$infor_product = $db->listProduct();
+// print_r($infor_product);
+?>
 
 <body>
     <div class="d-flex" id="wrapper">
-        <?php include "./component/adminSidebar.php"  ?>
+        <?php include "./component/adminSidebar.php" ?>
         <div id="page-content-wrapper">
-            <?php include "./component/adminNav.php"  ?>
+            <?php include "./component/adminNav.php" ?>
 
             <!-- content -->
-            <!-- <div class="container-fluid">
+            <div class="container-fluid">
                 <h1 class="mt-4">Product Management</h1>
-            </div> -->
-            <!-- Bootstrap -->
-            <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-            <link href="bootstrap/css/nava.css" rel="stylesheet">
-
-            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-            </head>
-
-            <body>
-                <div class="container">
-
-                    <!-- Static navbar -->
-                    <div class="navbar navbar-default" role="navigation">
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <img width="45" height="50" src="https://scontent.fbkk4-2.fna.fbcdn.net/v/t1.15752-9/67887652_360119611567842_6957564629715255296_n.png?_nc_cat=104&_nc_oc=AQkZxZoMdmnSq1X0dw5ese0GrY5kCMoQs78eDd7qkVS10HhZyp0p0c8fMsPF73RQdR4&_nc_ht=scontent.fbkk4-2.fna&oh=3ae145d0a3f5aea830dbc4413a3bb2b9&oe=5DD6B4ED" > 
-                                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button> -->
-                                <a class="">Jean By..พี่หมี</a>
+                <td style="margin-right:0px;"><button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#CreateProduct">เพิ่มสินค้า</button>
+                </td><br><br>
+                <table class="table" style="align:left">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">ชื่อสินค้า</th>
+                            <th scope="col">แบรนด์</th>
+                            <th scope="col">รุ่น</th>
+                            <th scope="col">สี</th>
+                            <th scope="col">ไซต์</th>
+                            <th scope="col">รูปภาพ</th>
+                            <th scope="col">ราคา</th>
+                            <th scope="col">จำนวน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 1;
+                        foreach ($infor_product as $row) {
+                            echo "<tr>";
+                            echo "<th scope=row>$i</th>";
+                            echo "<td>" . $row['product_name'] . "</td>";
+                            echo "<td>" . $row['brand'] . "</td>";
+                            echo "<td>" . $row['type'] . "</td>";
+                            echo "<td>" . $row['color'] . "</td>";
+                            echo "<td>" . $row['size'] . " </td>";
+                            echo "<td>" . $row['picture'] . " </td>";
+                            echo "<td>" . $row['price'] . "</td>";
+                            echo "<td>" . $row['qty'] . " </td>";
+                            echo "<td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#EditModal'>แก้ไข</button></td>";
+                            echo "<td><button type='button' class='btn btn-danger'>ลบ</button></td>";
+                            echo "</tr>";
+                            $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog " aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role=" document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลสินค้า</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="navbar-collapse collapse">
-                                
-                            </div>
-                            <!--/.nav-collapse -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                Add
-                            </button>
-                            <!-- The Modal -->
-                            <div class="modal" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">.:: Add Product ::.</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md- 6">
+                                            <label for="inputEmail4">ชื่อสินค้า</label>
+                                            <input type="text" class="form-control" name="pName" placeholder="Email">
                                         </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <form name="addproduct" action="add_product_db.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-9">
-                                                                <p> Name</p>
-                                                                <input type="text" name="p_name" class="form-control" required placeholder="Name" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-9">
-                                                                <p> Brand</p>
-                                                                <input type="text" name="p_name" class="form-control" required placeholder="Brand" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-8">
-                                                                <p> Type </p>
-                                                                <select name="type_id" class="form-control" required>
-                                                                    <option value="type_id">Long leg</option>
-                                                                    <option value="type_id">Short leg</option>
-                                                                    <?php foreach ($result as $results) { ?>
-                                                                    <option value="<?php echo $results["type_id"]; ?>">
-                                                                        <?php echo $results["type_name"]; ?>
-                                                                    </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-8">
-                                                                <p> Size </p>
-                                                                <select name="type_id" class="form-control" required>
-                                                                    <option value="type_id">S</option>
-                                                                    <option value="type_id">M</option>
-                                                                    <option value="type_id">L</option>
-                                                                    <option value="type_id">XL</option>
-                                                                    <option value="type_id">XXL</option>
-                                                                    <?php foreach ($result as $results) { ?>
-                                                                    <option value="<?php echo $results["type_id"]; ?>">
-                                                                        <?php echo $results["type_name"]; ?>
-                                                                    </option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-9">
-                                                                <p> Color</p>
-                                                                <input type="text" name="p_name" class="form-control" required placeholder="Color" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-9">
-                                                                <p> Quantity</p>
-                                                                <input type="text" name="p_name" class="form-control" required placeholder="Quantity" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-9">
-                                                                <p> Price</p>
-                                                                <input type="text" name="p_name" class="form-control" required placeholder="THB" />
-                                                            </div>
-                                                        </div>
-                                                        <!-- <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <p> Model </p>
-                                                                <textarea name="p_detail" rows="5" cols="60"></textarea>
-                                                            </div>
-                                                        </div> -->
-                                                        <div class="form-group">
-
-                                                            <div class="col-sm-12">
-                                                                <p> Picture </p>
-                                                                <input type="file" name="p_img" id="p_img" class="form-control" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-
-
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">แบรนด์</label>
+                                            <input type="text" class="form-control" name="pBrand"
+                                                placeholder="Password">
                                         </div>
-
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success" name="btnadd"> Save </button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div>
-
                                     </div>
-                                </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4">รุ่น</label>
+                                            <input type="text" class="form-control" name="pType " placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState">ไซต์</label>
+                                            <select id="pSize" class="form-control">
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4">สี</label>
+                                            <input type="text" class="form-control" name="pColor" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">ราคา</label>
+                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">จำนวน</label>
+                                            <input type="text" class="form-control" name="pQty" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">เลือกรูปภาพใหม่</label>
+                                        <input type="file" class="form-control-file" name="pPicture">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
                             </div>
+
                         </div>
-                        <!--/.container-fluid -->
                     </div>
+                </div>
+                <div class="modal fade" id="CreateProduct" tabindex="-1" role="dialog "
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role=" document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลสินค้า</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="form-group col-md- 6">
+                                            <label for="inputEmail4">ชื่อสินค้า</label>
+                                            <input type="text" class="form-control" name="pName" placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">แบรนด์</label>
+                                            <input type="text" class="form-control" name="pBrand"
+                                                placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4">รุ่น</label>
+                                            <input type="text" class="form-control" name="pType " placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputState">ไซต์</label>
+                                            <select id="pSize" class="form-control">
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                <option value="XXL">XXL</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="inputEmail4">สี</label>
+                                            <input type="text" class="form-control" name="pColor" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="inputEmail4">ราคา</label>
+                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputPassword4">จำนวน</label>
+                                            <input type="text" class="form-control" name="pQty" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">เลือกรูปภาพใหม่</label>
+                                        <input type="file" class="form-control-file" name="pPicture">
+                                    </div>
 
-                    <!-- Main component for a primary marketing message or call to action -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
 
-                    <h3>Products Management</h3>
+                        </div>
+                    </div>
+                </div>
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>รูป</th>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Color</th>
-                                <th>Size</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <!-- content -->
 
-                            <tr>
-                                <td><img src="images/<?php ?>" border="0"></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-                                <td><?php ?></td>
-
-                                <td>
-                                    <a class="btn btn-primary " href="updatecart.php?itemId=<?php echo $meResult['id']; ?>" role="button">
-                                        <span class="Edit"></span>
-                                        Edit</a>
-                                    <a class="btn btn-primary " href="updatecart.php?itemId=<?php echo $meResult['id']; ?>" role="button">
-                                        <span class="delete"></span>
-                                        Delete</a>
-
-                                </td>
-                            </tr>
-                            <?php
-
-                            ?>
-                        </tbody>
-                    </table>
-
-                </div> <!-- /container -->
-
-                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-                <script src="bootstrap/js/jquery.min.js"></script>
-                <!-- Include all compiled plugins (below), or include individual files as needed -->
-                <script src="bootstrap/js/bootstrap.min.js"></script>
-            </body>
-
-</html>
-<?php
-mysql_close();
-?>
-<!-- content -->
-
-</div>
-</div>
-
+            </div>
+        </div>
 </body>
 
 </html>
