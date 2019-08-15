@@ -15,7 +15,7 @@ $infor_product = $db->listProduct();
             <?php include "./component/adminNav.php" ?>
 
             <!-- content -->
-            <!-- <div class="container-fluid">
+            <div class="container-fluid">
                 <h1 class="mt-4">Product Management</h1>
                 <td style="margin-right:0px;"><button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#CreateProduct">เพิ่มสินค้า</button>
@@ -197,8 +197,8 @@ $infor_product = $db->listProduct();
 
                 <!-- content -->
 
+            </div>
         </div>
-    </div>
 </body>
 
 </html>
