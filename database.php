@@ -1,6 +1,12 @@
 <?php
 class database
 {   
+
+    public function __construct()
+    {
+        // if(empty($_SESSION['user_id'])) header('Location: index.php');
+    }
+
     public function connect_db()
     {
         $serverName = "192.168.20.102"; //Database Server 
@@ -49,7 +55,24 @@ class database
         $query = mysqli_query($conn, $sql);
         $result = mysqli_fetch_array($query, MYSQLI_ASSOC); 
         $countuser = $result['COUNT'];
-        return $countuser;
+        if($countuser){
+            session_start();
+            $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$hashpass'";
+            $query = mysqli_query($conn, $sql);
+            $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+            $_SESSION['user_id'] = $result['user_id'];
+            $_SESSION['firstname'] = $result['firstname'];
+            $_SESSION['lastname'] = $result['lastname'];
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['type'] = $result['type'];
+            $_SESSION['address'] = $result['address'];
+            $_SESSION['phone_no'] = $result['phone_no'];
+            if($result['type'] === 'user') header('Location: userIndex.php');
+            else if($result['type'] === 'admin') header('Location: adminIndex.php');
+        }else return 0;
+        
+
+        // return $countuser;
     }
 
     public function addProduct($product_name, $qty, $type, $size, $brand, $color, $description, $price, $picture)
@@ -74,12 +97,28 @@ class database
         else return 0;
     }
 
+    public function listUser()
+    {
+        $conn = $this->connect_db();
+
+        $sql = "SELECT * FROM product";
+        $query = mysqli_query($conn, $sql);
+
+        $result = array();
+        while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+            $result[] = $row;
+        }
+
+        if ($result) return $result;
+        else return 0;
+    }
+
 
 }
     // $db = new database;
     // echo "<pre>";
-    // // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
+    // print_r($db->register('admin', 'dsad', 'q', '1', '1', 'address das', '0844065875'));
     // // print_r($db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
-    // print_r($db->listProduct());
+    // print_r($db->login('q', 1));
     
     ?>
