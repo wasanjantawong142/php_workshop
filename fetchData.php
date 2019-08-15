@@ -113,24 +113,25 @@ class database
         else return 0;
     }
 
-    public function updateUser($firstname, $lastname, $address, $phone_no, $user_id)
-    {
-        $conn = $this->connect_db();
-
-        $sql = "UPDATE `user` SET `firstname` = '$firstname', `lastname` = '$lastname', `address` = '$address', `phone_no` = $phone_no WHERE `user`.`user_id` = '$user_id'";
-        $query = mysqli_query($conn, $sql);
-
-        if ($query) return $query;
-        else return 0;
+}
+    $db = new database;
+    $method = $_GET['method'];
+    // echo "<pre>";
+    switch ($method) {
+        case "listUser":
+            echo json_encode($db->listUser());
+            break;
+        case "blue":
+            echo "Your favorite color is blue!";
+            break;
+        case "green":
+            echo "Your favorite color is green!";
+            break;
+        default:
+            echo "Your favorite color is neither red, blue, nor green!";
     }
 
-
-}
-
-    // $db = new database;
     // echo "<pre>";
     // print_r($db->register('admin', 'dsad', 'q', '1', '1', 'address das', '0844065875'));
     // // print_r($db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
-    // print_r($db->updateUser('q', 's', 'a', '084406575', '1'));
-
-?>
+    // print_r($db->login('q', 1));
