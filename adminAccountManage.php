@@ -10,15 +10,15 @@
 
             <!-- content -->
             <div class="container-fluid">
-                <h1 class="mt-4">Account Management</h1><br><br>
+                <h1 class="mt-4">Account Management</h1> <br><br>
                 <table class="table" style="align:left">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No.</th>
-                            <th scope="col">FirstName</th>
-                            <th scope="col">LastName</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Tel</th>
+                            <th scope="col">ชื่อ</th>
+                            <th scope="col">นามสกุล</th>
+                            <th scope="col">ที่อยู่</th>
+                            <th scope="col">เบอร์โทร</th>
                         </tr>
                     </thead>
                     <tbody>
