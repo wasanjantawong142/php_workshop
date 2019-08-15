@@ -54,7 +54,7 @@ class database
 
 
 }
-    $db = new database;
-    echo "<pre>";
-    print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
+    // $db = new database;
+    // echo "<pre>";
+    // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
     ?>
