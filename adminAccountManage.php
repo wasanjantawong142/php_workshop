@@ -19,7 +19,7 @@ $dataAccount = $db->listUser();
             <!-- content -->
             <div class="container-fluid">
                 <h1 class="mt-4">Account Management</h1> <br><br>
-                <table class="table" style="align:left">
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No.</th>
@@ -27,25 +27,31 @@ $dataAccount = $db->listUser();
                             <th scope="col">นามสกุล</th>
                             <th scope="col">ที่อยู่</th>
                             <th scope="col">เบอร์โทร</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 1;
+                        foreach ($dataAccount as $key => $value) ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>0918588027</td>
-                            <td style="margin-right:0px;"><button type="button" class="btn btn-warning"
-                                    data-toggle="modal" data-target="#EditModal">แก้ไข</button>
-                            </td>
-                            <td><button type=" button" class="btn btn-danger">ลบ</button>
+                            <th scope="row"><?= $i ?></th>
+                            <td><?= $value['firstname'] ?></td>
+                            <td><?= $value['lastname'] ?></td>
+                            <td><?= $value['address'] ?></td>
+                            <td><?= $value['phone_no'] ?></td>
+
+                            <td>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EditModal">แก้ไข</button>
+                                <button type=" button" class="btn btn-danger">ลบ</button>
                             </td>
                         </tr>
+                        <?php $i++;
+                        foreach ($dataAccount as $key => $value) ?>
+
                     </tbody>
                 </table>
-                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+
+                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -63,14 +69,12 @@ $dataAccount = $db->listUser();
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">นามสกุล</label>
-                                            <input type="text" class="form-control" name="cLName"
-                                                placeholder="Password">
+                                            <input type="text" class="form-control" name="cLName" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress">ที่อยู่</label>
-                                        <input type="text" class="form-control" name="cAddress"
-                                            placeholder="1234 Main St">
+                                        <input type="text" class="form-control" name="cAddress" placeholder="1234 Main St">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress">เบอร์โทร</label>
@@ -89,7 +93,11 @@ $dataAccount = $db->listUser();
 
             </div>
             <!-- content -->
-
+            <script>
+                $(document).ready(function() {
+                    $('#example').DataTable();
+                });
+            </script>
 </body>
 
 </html>

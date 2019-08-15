@@ -19,38 +19,75 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">
-                    <form action="BEindex.php" method="post">
+                    <form action="BEregister.php" method="post">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input required type="text" name="username" class="form-control input_user" value="" placeholder="username">
+                            <input required type="text" name="fname" class="form-control input_user" value="" placeholder="Firstname">
                         </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input required type="text" name="lname" class="form-control input_user" value="" placeholder="Lastname">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input required type="text" name="user" class="form-control input_user" value="" placeholder="username">
+                        </div>
+
                         <div class="input-group mb-2">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input required type="password" name="password" class="form-control input_pass" value="" placeholder="password">
+                            <input required type="password" name="pass" class="form-control input_pass" value="" placeholder="password">
                         </div>
 
-                        <div class="row">
-                        <div class="col-md-5">
-                        <a href="register.php">
-                            <button type="button" name="button" class="btn btn-success btn-size">Register</button>
-                        </a>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input required type="password" name="confirmedpass" class="form-control input_pass" value="" placeholder="password">
                         </div>
-                        <div class="offset-md-2 col-md-5">
-                            <button type="submit" name="button" class="btn btn-primary btn-size">Login</button>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="tel" class="form-control input_user" value="" placeholder="Tel">
                         </div>
-                    </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input required type="text" name="address" class="form-control input_user" value="" placeholder="Address">
+                        </div>
+
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5">       
+                                    <a href="index.php">
+                                    <button type="button" name="button" class="btn btn-danger btn-size">Black</button>
+                                    </a>
+                                </div>
+                                <div class="offset-md-2 col-md-5">
+                                    <button type="submit" name="button" class="btn btn-success btn-size">Ok</button>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </form>
+                    
                 </div>
-                <br>
-                <div class="container">
-                   
-                </div>
-
+             
 
             </div>
         </div>
@@ -75,7 +112,7 @@
         }
 
         .user_card {
-            height: 315px;
+            /* height: 315px; */
             width: 350px;
             margin-top: auto;
             margin-bottom: auto;
