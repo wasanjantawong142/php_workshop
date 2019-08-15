@@ -110,7 +110,7 @@ $dataAccount = $db->listUser();
                             success: function(data) {
                                 // console.log(data);
                                 var editData = data.filter(item => {
-                                    return item.user_id === '1'
+                                    return item.user_id === user_id
                                 })
                                 // console.log(editData[0].firstname);
                                 $('#name').val(editData[0].firstname);
