@@ -52,9 +52,34 @@ class database
         return $countuser;
     }
 
+    public function addProduct($product_name, $qty, $type, $size, $brand, $color, $description, $price, $picture)
+    {
+        $conn = $this->connect_db();
+
+        $sql = "INSERT INTO `product` (`product_name`, `qty`, `type`, `size`, `brand`, `color`, `description`, `created_at`, `update_at`, `product_status`, `price`, `picture`) 
+                            VALUES ('$product_name', '$qty', '$type', '$size', '$brand', '$color', '$description', now(), now(), '1', '$price', '$picture' )";
+        $query = mysqli_query($conn, $sql);
+        if ($query) return 1;
+        else return 0;
+    }
+
+    public function listProduct()
+    {
+        $conn = $this->connect_db();
+
+        $sql = "SELECT * FROM product";
+        $query = mysqli_query($conn, $sql);
+        $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+        if ($result) return $result;
+        else return 0;
+    }
+
 
 }
-    // $db = new database;
-    // echo "<pre>";
+    $db = new database;
+    echo "<pre>";
     // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
+    // print_r($db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
+    print_r($db->listProduct());
+    
     ?>
