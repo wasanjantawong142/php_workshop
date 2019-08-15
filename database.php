@@ -73,23 +73,5 @@ class database
         if ($result) return $result;
         else return 0;
     }
-
-
-    $sql = "SELECT FROM user WHERE username = ' $username' AND password = ' $hashpass' ";
-    $query = mysqli_query($conn, $sql);
-    $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
-    $countuser = $result['COUNT'];
-    return $countuser;
 }
-}
-$db = new database;
-echo "<pre>";
-    // print_r($db->register('admin', 'dsad', 'admin015', '1', '1', 'address das', '0844065875'));
-<< << <<< HEAD
 ?>
-=======
-// print_r( $db->addProduct('อะไรดี', '10', '?', 's', 'gh', 'red', 'hhk', '10.20', 'imgpath'));
-print_r( $db->listProduct());
-
-?>
->>>>>>> origin/master
