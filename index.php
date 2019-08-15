@@ -2,9 +2,9 @@
 <html lang="en">
 <?php include "./component/userHead.php"  ?>
 <?php 
-    require_once "./database.php";
-    $db = new database;
-    $conn = $db->connect_db();
+    // require_once "./database.php";
+    // $db = new database;
+    // $conn = $db->connect_db();
     // echo "<pre>";
     // print_r($conn);
 ?>

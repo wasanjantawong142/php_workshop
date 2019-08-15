@@ -1,3 +1,11 @@
+<?php
+require_once "./database.php";
+$db = new database;
+$dataAccount = $db->listUser();
+// echo "<pre>";
+// print_r($dataAccount);
+?>
+
 <!doctype html>
 <html lang="en">
 <?php include "./component/adminHead.php" ?>
