@@ -32,7 +32,7 @@ $infor_product = $db->listProduct();
                             <th scope="col">รูปภาพ</th>
                             <th scope="col">ราคา</th>
                             <th scope="col">จำนวน</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" style="width: 100px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@ $infor_product = $db->listProduct();
                             echo "<td>" . $row['picture'] . " </td>";
                             echo "<td>" . $row['price'] . "</td>";
                             echo "<td>" . $row['qty'] . " </td>";
-                            echo "<td><button type='button' class='btn btn-warning edit_data' data-toggle='modal' data-target='#EditModal' id=" . $row['product_id'] . ">แก้ไข</button>";
+                            echo "<td><button type='button' class='btn btn-warning edit_data' data-toggle='modal' data-target='#EditModal' id=" . $row['product_id'] . ">แก้ไข</button> ";
                             echo "<button type='button' class='btn btn-danger del_data' data-toggle='modal' data-target='#DeleteProduct' id=" . $row['product_id'] . ">ลบ</button></td>";
                             echo "</tr>";
                             $i++;

@@ -15,13 +15,13 @@
                     <form action="BEindex.php" method="post">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
                             </div>
                             <input required type="text" name="username" class="form-control input_user" value="" placeholder="username">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <span class="input-group-text"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
                             </div>
                             <input required type="password" name="password" class="form-control input_pass" value="" placeholder="password">
                         </div>
@@ -140,7 +140,11 @@
 
     <script>
         setInterval(() => {
-            $("#super_logo").animate({marginTop: "-110px"}, 800).animate({marginTop: "0px"}, 600)
+            $("#super_logo").animate({
+                marginTop: "-110px"
+            }, 800).animate({
+                marginTop: "0px"
+            }, 600)
         }, 2200);
     </script>
 

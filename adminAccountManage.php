@@ -46,8 +46,8 @@ $dataAccount = $db->listUser();
                             <td>
                                 <button type="button" class="btn btn-warning edit_data" id="<?= $value['user_id'] ?>"
                                     data-toggle="modal" data-target="#EditModal">แก้ไข</button>
-                                <button type="button" class="btn btn-danger Del_data" id="<?= $value['user_id'] ?>"
-                                    data-toggle="modal" data-target="#DeleteModal">ลบ</button></a>
+                                <a href="adminAccountManageDel.php?userId=<?= $value['user_id'] ?>"><button
+                                        type="button" class="btn btn-danger">ลบ</button></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -103,82 +103,34 @@ $dataAccount = $db->listUser();
                 </div>
 
             </div>
-            <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog " aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Do you want delete?</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="adminAccountManageDel.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="userId" id="userIdDel">
+            <!-- content -->
+            <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">OK</button></a>
-                                </div>
-                            </form>
-                        </div>
+                $(document).on('click', '.edit_data', function() {
+                    var user_id = $(this).attr("id");
+                    $.ajax({
+                        url: "fetchData.php?method=listUser",
+                        method: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            // console.log(data);
+                            var editData = data.filter(item => {
+                                return item.user_id === user_id
+                            })
+                            // console.log(editData[0].firstname);
+                            $('#name').val(editData[0].firstname);
+                            $('#lastname').val(editData[0].lastname);
+                            $('#address').val(editData[0].address);
+                            $('#tel').val(editData[0].phone_no);
+                            $('#userId').val(editData[0].user_id);
+                        }
+                    });
+                });
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- content -->
-    <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-        $(document).on('click', '.edit_data', function() {
-            var user_id = $(this).attr("id");
-            $.ajax({
-                url: "fetchData.php?method=listUser",
-                method: "GET",
-                dataType: "json",
-                success: function(data) {
-                    // console.log(data);
-                    var editData = data.filter(item => {
-                        return item.user_id === user_id
-                    })
-                    // console.log(editData[0].firstname);
-                    $('#name').val(editData[0].firstname);
-                    $('#lastname').val(editData[0].lastname);
-                    $('#address').val(editData[0].address);
-                    $('#tel').val(editData[0].phone_no);
-                    $('#userId').val(editData[0].user_id);
-                }
             });
-        });
-
-    });
-    $(document).ready(function() {
-        $('#example').DataTable();
-        $(document).on('click', '.Del_data', function() {
-            var user_id = $(this).attr("id");
-            console.log(user_id);
-            $.ajax({
-                url: "fetchData.php?method=listUser",
-                method: "GET",
-                dataType: "json",
-                success: function(data) {
-                    // console.log(data);
-                    var editData = data.filter(item => {
-                        return item.user_id === user_id
-                    })
-                    // console.log(editData[0].firstname);
-
-                    $('#userIdDel').val(editData[0].user_id);
-                }
-            });
-        });
-
-    });
-    </script>
-
+            </script>
 </body>
 
 </html>

@@ -1,167 +1,178 @@
 <!doctype html>
 <html lang="en">
-<?php 
-    include "./component/userHead.php";
-    if (!empty($_SESSION['userId'])) {
-        if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
-        // else header("Location: userIndex.php");
-        // exit;
-    } else {
-        header('Location: index.php');
-        // exit;
-    }
+<?php
+include "./component/userHead.php";
+if (!empty($_SESSION['userId'])) {
+  if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
+  // else header("Location: userIndex.php");
+  // exit;
+} else {
+  header('Location: index.php');
+  // exit;
+}
 ?>
 
 
 <head>
 
-    <style>
-        html {
-            box-sizing: border-box;
-        }
+  <style>
+    html {
+      box-sizing: border-box;
+    }
 
-        *,
-        *:before,
-        *:after {
-            box-sizing: inherit;
-        }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-        .column {
-            float: left;
-            width: 33.3%;
-            margin-bottom: 16px;
-            padding: 0 8px;
-        }
+    .column {
+      float: left;
+      width: 33.3%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
 
-        @media screen and (max-width: 650px) {
-            .column {
-                width: 100%;
-                display: block;
-            }
-        }
+    @media screen and (max-width: 650px) {
+      .column {
+        width: 100%;
+        display: block;
+      }
+    }
 
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-        .container {
-            padding: 0 16px;
-        }
+    .container {
+      padding: 0 16px;
+    }
 
-        .container::after,
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
 
-        .title {
-            color: grey;
-        }
+    .title {
+      color: grey;
+    }
 
-        .button {
-            border: none;
-            outline: 0;
-            display: inline-block;
-            padding: 8px;
-            color: white;
-            background-color: #CD853F;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-        }
+    .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #CD853F;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+    }
 
-        .button:hover {
-            background-color: #555;
-        }
-    </style>
+    .button:hover {
+      background-color: #555;
+    }
+  </style>
 </head>
 
 <body>
-    <?php include "./component/userNav.php"  ?>
-    <?php
-    require_once "./database.php";
-    $db = new database;
-    $result = $db->listProduct();
-    $i = 0;
-    // echo "<pre>";
-    // print_r($_SESSION);
-    // 	ini_set('display_errors', 1);
-    // 	error_reporting(~0);
+  <?php include "./component/userNav.php"  ?>
+  <?php
+  require_once "./database.php";
+  $db = new database;
+  $result = $db->listProduct();
+  $i = 0;
+  // echo "<pre>";
+  // print_r($_SESSION);
+  // 	ini_set('display_errors', 1);
+  // 	error_reporting(~0);
 
-    //    $serverName = "192.168.20.102";
-    //    $userName = "root";
-    //    $userPassword = "";
-    //    $dbName = "db_php_workshop";
+  //    $serverName = "192.168.20.102";
+  //    $userName = "root";
+  //    $userPassword = "";
+  //    $dbName = "db_php_workshop";
 
-    //    $conn = mysqli_connect($serverName,$userName,$userPassword,$dbName);
+  //    $conn = mysqli_connect($serverName,$userName,$userPassword,$dbName);
 
-    //    $sql = "SELECT * FROM product";
+  //    $sql = "SELECT * FROM product";
 
-    //    $query = mysqli_query($conn,$sql);
+  //    $query = mysqli_query($conn,$sql);
 
-    ?>
+  ?>
 
 
 
-    <!-- body --> <br>
-    <h2>&nbsp;JEANS</h2>
-    <p>&nbsp;เปลี่ยนชีวิตประจำวันของคุณให้ไม่จำเจ กับกางเกงยีนส์จากพี่หมี</p>
-    <hr width=90% size=10 color=#DCDCDC>
-    <div class="container">
+  <!-- body --> <br>
+  <h2>&nbsp;JEANS</h2>
+  <p>&nbsp;เปลี่ยนชีวิตประจำวันของคุณให้ไม่จำเจ กับกางเกงยีนส์จากพี่หมี</p>
+  <hr width=90% size=10 color=#DCDCDC>
+  <div class="container">
 
-        <!-- Button to Open the Modal -->
-        <form action="userSelectProduct.php" method="POST">
-            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
-                Order Now
-            </button>
+    <!-- Button to Open the Modal -->
+    <form action="userSelectProduct.php" method="POST">
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+        Order Now
+      </button>
 
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">.:: Order ::.</h4>
-                            <button type="button" class="close" data-dismiss="modal"></button>
-                        </div>
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">.:: Order ::.</h4>
+              <button type="button" class="close" data-dismiss="modal"></button>
+            </div>
 
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row table-responsive">
-                                    <form class="">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Product Name</th>
-                                                    <th>Color</th>
-                                                    <th>Size</th>
-                                                    <th class="text-center">qty</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($result as $key => $value) :
-                                                    if (!empty($_SESSION['selectProduct'][$value['product_id']])) : ?>
-                                                <tr>
-                                                    <td><?= ++$i ?></td>
-                                                    <td><?= $value['product_name'] ?></td>
-                                                    <td><?= $value['color'] ?></td>
-                                                    <td><?= $value['size'] ?></td>
-                                                    <td class="text-center"><input required class="form-control text-right" type="number" name="qty[]" value="<?= $_SESSION['selectProduct'][$value['product_id']] ?>"></td>
-                                                    <td class="text-center"><button type="button" class="btn btn-danger"><i class="fa fa-trash" style="font-size: 1.5em;" aria-hidden="true"></i></button></td>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="container">
+                <div class="row table-responsive">
+                  <form class="">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Product Name</th>
+                          <th>Color</th>
+                          <th>Size</th>
+                          <th class="text-center">qty</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($result as $key => $value) :
+                          if (!empty($_SESSION['selectProduct'][$value['product_id']])) : ?>
+                        <tr>
+                          <td><?= ++$i ?></td>
+                          <td><?= $value['product_name'] ?></td>
+                          <td><?= $value['color'] ?></td>
+                          <td><?= $value['size'] ?></td>
+                          <td class="text-center"><input required class="form-control text-right" type="number" name="qty[]" value="<?= $_SESSION['selectProduct'][$value['product_id']] ?>"></td>
+                          <?php foreach ($_SESSION['selectProduct'] as $k => $v) :
+                                if ($k == $value['product_id']) :
+                                  ?>
+                          <script>
+                            function Del(id) {
+                              $("#del_a").attr("href", "userSelectProduct.php?productId=" + id);
+                            }
+                          </script>
+                          <td class="text-center"><button type="button" class="btn btn-danger Del_data" onclick="Del(<?= $k ?>)" data-toggle="modal" data-target="#DeleteModal"><i class="fa fa-trash" style="font-size: 1.5em;" aria-hidden="true"></i></button></td>
+                          <?php endif;
+                              endforeach;
 
-                                                    <input type="hidden" value="<?= $value['product_id'] ?>" name="productId[]">
-                                                </tr>
-                                                <?php endif;
-                                                endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </form>
+                              ?>
+                          <input type="hidden" value="<?= $value['product_id'] ?>" name="productId[]">
+                        </tr>
+                        <?php endif;
+                        endforeach; ?>
+                      </tbody>
+                    </table>
+                  </form>
 
-                                    <!-- <form name="addproduct" action="add_product_db.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                  <!-- <form name="addproduct" action="add_product_db.php" method="POST" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="form-group">
                                             <div class="col-sm-9">
                                                 <h4> Cash on delivery only..</h4>
@@ -206,60 +217,82 @@
                                             </div>
                                     </form> -->
 
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" value="submit" name="btnadd"> Submit </button>
-                            <!-- <input name="print" type="submit" id="print" value="Print" onClick="window.print()"/> -->
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
                 </div>
+              </div>
             </div>
 
-    </div>
-    <br>
-    <br>
-    <div class="row-fluid">
-
-        <?php
-        // echo "<pre>";
-        // print_r($_SESSION['selectProduct']);
-        // exit;
-        ?>
-
-        <?php foreach ($result as $key => $value) : ?>
-        <div class="column">
-            <div class="card <?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "select-order"; ?>">
-                <img src="./img/<?= $value['picture'] ?>" alt="<?= $value['product_name'] ?>" style="width:100%">
-                <div class="container text-center">
-                    <h2><?= $value['product_name'] ?> (<?= $value['brand'] ?>)</h2>
-                    <p class="title"><?= number_format($value['price'], 2) ?></p>
-                    <p><?= $value['color'] ?> (<?= $value['size'] ?>)</p>
-                    <p><?= $value['description'] ?> </p>
-                    <p><a href="userSelectProduct.php?productId=<?= $value['product_id'] ?>"><button class="button"><?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "Selected";
-                                                                                                                        else echo "Select" ?></button></a></p>
-                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" value="submit" name="btnadd"> Submit </button>
+              <!-- <input name="print" type="submit" id="print" value="Print" onClick="window.print()"/> -->
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
+
+          </div>
         </div>
-        <?php endforeach;  ?>
+      </div>
 
+
+      <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog " aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Do you want delete?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a id="del_a"><button type="button" class="btn btn-primary">OK</button></a>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <br>
+  <br>
+  <div class="row-fluid">
+
+    <?php
+    // echo "<pre>";
+    // print_r($_SESSION['selectProduct']);
+    // exit;
+    ?>
+
+    <?php foreach ($result as $key => $value) : ?>
+    <div class="column">
+      <div class="card <?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "select-order"; ?>">
+        <img src="./img/<?= $value['picture'] ?>" alt="<?= $value['product_name'] ?>" style="width:100%">
+        <div class="container text-center">
+          <h2><?= $value['product_name'] ?> (<?= $value['brand'] ?>)</h2>
+          <p class="title"><?= number_format($value['price'], 2) ?></p>
+          <p><?= $value['color'] ?> (<?= $value['size'] ?>)</p>
+          <p><?= $value['description'] ?> </p>
+          <p><a href="userSelectProduct.php?productId=<?= $value['product_id'] ?>"><button class="button"><?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "Selected";
+                                                                                                            else echo "Select" ?></button></a></p>
+        </div>
+      </div>
     </div>
+    <?php endforeach;  ?>
 
-    <hr width=90% size=10 color=#DCDCDC><br>
-    <!-- body -->
-    <style>
-        .select-order {
-            border-radius: 7px 7px 7px 7px;
-            -moz-border-radius: 7px 7px 7px 7px;
-            -webkit-border-radius: 7px 7px 7px 7px;
-            border: 4px outset #ff8400;
-        }
-    </style>
+  </div>
+
+  <hr width=90% size=10 color=#DCDCDC><br>
+  <!-- body -->
+  <style>
+    .select-order {
+      border-radius: 7px 7px 7px 7px;
+      -moz-border-radius: 7px 7px 7px 7px;
+      -webkit-border-radius: 7px 7px 7px 7px;
+      border: 4px outset #ff8400;
+    }
+  </style>
+
 
 </body>
 

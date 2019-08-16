@@ -4,6 +4,9 @@ class database
     public function __construct()
     {
         if(empty($_SESSION)) session_start();
+        // $a = [10, 20, 30];
+        // print_r(array_keys($a[0]));
+        // exit;
     }
 
     public function connect_db()

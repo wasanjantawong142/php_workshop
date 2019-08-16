@@ -39,8 +39,6 @@
             exit;
         }
     }
-
-    
     
     header("Location: userIndex.php");
 

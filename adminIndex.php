@@ -8,10 +8,10 @@
     if (!empty($_SESSION['userId'])) {
         if ($_SESSION['type'] === "user") header("Location: userIndex.php");
         // else header("Location: userIndex.php");
-        exit;
+        // exit;
     } else {
         header('Location: index.php');
-        exit;
+        // exit;
     }
 
 ?>

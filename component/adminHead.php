@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    if (empty($_SESSION)) session_start();
 
     // if (!empty($_SESSION['userId'])) {
     //     if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
