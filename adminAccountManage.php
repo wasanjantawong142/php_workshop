@@ -102,13 +102,15 @@ $dataAccount = $db->listUser();
                     $('#example').DataTable();
 
                     $(document).on('click', '.edit_data', function() {
+
                         var user_id = $(this).attr("id");
+                        console.log(user_id)
                         $.ajax({
                             url: "fetchData.php?method=listUser",
                             method: "GET",
                             dataType: "json",
                             success: function(data) {
-                                // console.log(data);
+                                console.log(data);
                                 var editData = data.filter(item => {
                                     return item.user_id === user_id
                                 })

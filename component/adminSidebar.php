@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading">
-        Jean By พี่หมี
+        <a href="../php_workshop/adminIndex.php">Jean By พี่หมี</a>
     </div>
     <div class="list-group list-group-flush">
         <a href="../php_workshop/adminAccountManage.php" class="list-group-item list-group-item-action bg-light">Account Management</a>

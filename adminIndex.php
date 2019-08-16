@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en">
-<?php include "./component/adminHead.php"  ?>
+<?php 
+    include "./component/adminHead.php";
+    require_once "./database.php";
+    $db = new database;
+
+?>
 
 <body>
     <div class="d-flex" id="wrapper">

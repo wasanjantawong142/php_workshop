@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
 <?php include "./component/userHead.php"  ?>
-<?php 
-    // require_once "./database.php";
-    // $db = new database;
-    // $conn = $db->connect_db();
-    // echo "<pre>";
-    // print_r($conn);
+<?php
+if (!empty($_SESSION['userId'])) {
+    if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
+    else header("Location: userIndex.php");
+    exit;
+}
+
 ?>
 
 <body>
@@ -15,7 +16,7 @@
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
-                        <img src="./img/user/logo_login.png" class="brand_logo" alt="Logo">
+                        <img id="super_logo" src="./img/user/logo_login.png" class="brand_logo" alt="Logo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">
@@ -34,21 +35,21 @@
                         </div>
 
                         <div class="row">
-                        <div class="col-md-5">
-                        <a href="register.php">
-                            <button type="button" name="button" class="btn btn-success btn-size">Register</button>
-                        </a>
+                            <div class="col-md-5">
+                                <a href="register.php">
+                                    <button type="button" name="button" class="btn btn-success btn-size">Register</button>
+                                </a>
+                            </div>
+                            <div class="offset-md-2 col-md-5">
+                                <button type="submit" name="button" class="btn btn-primary btn-size">Login</button>
+                            </div>
                         </div>
-                        <div class="offset-md-2 col-md-5">
-                            <button type="submit" name="button" class="btn btn-primary btn-size">Login</button>
-                        </div>
-                    </div>
 
                     </form>
                 </div>
                 <br>
                 <div class="container">
-                   
+
                 </div>
 
 
@@ -62,7 +63,7 @@
             border: 1px solid red;
         } */
 
-        .btn-size{
+        .btn-size {
             width: 100%;
         }
 
@@ -144,6 +145,12 @@
             background-color: #c0392b !important;
         }
     </style>
+
+    <script>
+        setInterval(() => {
+            $("#super_logo").animate({marginTop: "-110px"}, 800).animate({marginTop: "0px"}, 600)
+        }, 2200);
+    </script>
 
 </body>
 

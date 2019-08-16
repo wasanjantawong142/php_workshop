@@ -15,8 +15,10 @@ $tel = $_REQUEST["tel"];
 $address = $_REQUEST["address"];
 
 $regis_ok = $db->register($fname, $lname, $user, $pass, $confirmedpass, $tel, $address);
+// echo "<pre>";
+// print_r($regis_ok);
 
-if(!$regis_ok ){
+if($regis_ok ){
 echo '<script language="javascript">';
 echo 'alert("Register success");window.location.href="index.php"';
 echo '</script>';

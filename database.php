@@ -4,12 +4,30 @@ class database
 
     public function __construct()
     {
-        // if(empty($_SESSION['user_id'])) header('Location: index.php');
+        if(empty($_SESSION['userId'])) session_start();
+        // $sda = [];
+        // print_r($_SESSION);
+        // exit;
+        // $this->checkTypeUser();
+    }
+
+    public function checkTypeUser()
+    {
+        if (!empty($_SESSION['userId'])) {
+            if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
+            else header("Location: userIndex.php");
+        }else{
+            // echo "<pre>";
+            // print_r($_SESSION);
+            // exit;
+            header('Location: index.php');
+            exit;
+        }
     }
 
     public function connect_db()
     {
-        $serverName = "192.168.20.102"; //Database Server 
+        $serverName = "localhost"; //Database Server 
         $userName = "root"; // 
         $userPassword = "";
         $dbName = "db_php_workshop";
@@ -32,7 +50,7 @@ class database
         $query = mysqli_query($conn, $sql);
         $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
         $countuser = $result['COUNT'];
-        if ($countuser > 0) return 0;
+        if ($countuser > 0) return 10;
 
         if ($password !== $confirm_password) return 0;
         else {
@@ -60,7 +78,7 @@ class database
             $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$hashpass'";
             $query = mysqli_query($conn, $sql);
             $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
-            $_SESSION['user_id'] = $result['user_id'];
+            $_SESSION['userId'] = $result['user_id'];
             $_SESSION['firstname'] = $result['firstname'];
             $_SESSION['lastname'] = $result['lastname'];
             $_SESSION['username'] = $result['username'];
@@ -128,11 +146,40 @@ class database
     {
         $conn = $this->connect_db();
 
-        $sql = "UPDATE `user` SET `user_status` = '$user_id' WHERE `user`.`user_id` = '$user_id'";
+        $sql = "UPDATE `user` SET `user_status` = '99' WHERE `user`.`user_id` = '$user_id'";
         $query = mysqli_query($conn, $sql);
 
         if ($query) return $query;
         else return 0;
+    }
+
+    public function insertOrder($userId, $product, $qty)
+    {
+        $conn = $this->connect_db();
+        mysqli_autocommit($conn, FALSE);
+        try {
+            mysqli_query($conn, "INSERT INTO order(`user_id`, `order_status`, `created_at`) VALUES('$userId', 'รอจัดส่ง', now())");//insert Order
+            $last_id = mysqli_insert_id($conn);
+
+            foreach($product as $key => $proId){
+                mysqli_query($conn, "INSERT INTO `order_detail` (`order_id`, `product_id`, `order_detail_status`, `created_at`, `qty`) 
+                                     VALUES ('$last_id', '$proId', '1', now(), '$qty[$key])");//insert Order detail
+            }
+
+            $sql = "SELECT SUM(price) AS total FROM `order_detail` INNER JOIN `product` USING(product_id) WHERE order_detail.order_detail_status = '1' AND order_id = '$last_id '";
+            $query = mysqli_query($conn, $sql);
+            $result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+            $total = $result['total'];
+
+            mysqli_commit($conn);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            mysqli_rollback($conn);
+            throw $th;
+
+        }
+
+
     }
 
 
