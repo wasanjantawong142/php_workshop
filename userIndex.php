@@ -214,7 +214,7 @@
     </div>
     <br>
     <br>
-    <div class="row">
+    <div class="row-fluid">
 
         <?php
         // echo "<pre>";
@@ -226,9 +226,10 @@
         <div class="column">
             <div class="card <?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "select-order"; ?>">
                 <img src="./img/<?= $value['picture'] ?>" alt="<?= $value['product_name'] ?>" style="width:100%">
-                <div class="container">
-                    <h2><?= $value['product_name'] ?></h2>
+                <div class="container text-center">
+                    <h2><?= $value['product_name'] ?> (<?= $value['brand'] ?>)</h2>
                     <p class="title"><?= number_format($value['price'], 2) ?></p>
+                    <p><?= $value['color'] ?> (<?= $value['size'] ?>)</p>
                     <p><?= $value['description'] ?> </p>
                     <p><a href="userSelectProduct.php?productId=<?= $value['product_id'] ?>"><button class="button"><?php if (!empty($_SESSION['selectProduct'][$value['product_id']])) echo "Selected";
                                                                                                                         else echo "Select" ?></button></a></p>

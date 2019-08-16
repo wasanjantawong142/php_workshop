@@ -44,8 +44,10 @@ $dataAccount = $db->listUser();
                             <td><?= $value['phone_no'] ?></td>
 
                             <td>
-                                <button type="button" class="btn btn-warning edit_data" id="<?= $value['user_id'] ?>" data-toggle="modal" data-target="#EditModal">แก้ไข</button>
-                                <a href="adminAccountManageDel.php?userId=<?= $value['user_id'] ?>"><button type="button" class="btn btn-danger">ลบ</button></a>
+                                <button type="button" class="btn btn-warning edit_data" id="<?= $value['user_id'] ?>"
+                                    data-toggle="modal" data-target="#EditModal">แก้ไข</button>
+                                <a href="adminAccountManageDel.php?userId=<?= $value['user_id'] ?>"><button
+                                        type="button" class="btn btn-danger">ลบ</button></a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -53,7 +55,8 @@ $dataAccount = $db->listUser();
                     </tbody>
                 </table>
 
-                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <form action="adminAccountManageSave.php" method="post">
@@ -68,20 +71,24 @@ $dataAccount = $db->listUser();
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">ชื่อ</label>
-                                            <input required id="name" type="text" class="form-control" name="firstname" placeholder="">
+                                            <input required id="name" type="text" class="form-control" name="firstname"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">นามสกุล</label>
-                                            <input required id="lastname" type="text" class="form-control" name="lastname" placeholder="">
+                                            <input required id="lastname" type="text" class="form-control"
+                                                name="lastname" placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress">ที่อยู่</label>
-                                        <input required id="address" type="text" class="form-control" name="address" placeholder="">
+                                        <input required id="address" type="text" class="form-control" name="address"
+                                            placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress">เบอร์โทร</label>
-                                        <input required id="tel" type="text" class="form-control" name="tel" placeholder="">
+                                        <input required id="tel" type="text" class="form-control" name="tel"
+                                            placeholder="">
                                         <input type="hidden" name="userId" id="userId">
                                     </div>
 
@@ -98,34 +105,31 @@ $dataAccount = $db->listUser();
             </div>
             <!-- content -->
             <script>
-                $(document).ready(function() {
-                    $('#example').DataTable();
+            $(document).ready(function() {
+                $('#example').DataTable();
 
-                    $(document).on('click', '.edit_data', function() {
-
-                        var user_id = $(this).attr("id");
-                        console.log(user_id)
-                        $.ajax({
-                            url: "fetchData.php?method=listUser",
-                            method: "GET",
-                            dataType: "json",
-                            success: function(data) {
-                                console.log(data);
-                                var editData = data.filter(item => {
-                                    return item.user_id === user_id
-                                })
-                                // console.log(editData[0].firstname);
-                                $('#name').val(editData[0].firstname);
-                                $('#lastname').val(editData[0].lastname);
-                                $('#address').val(editData[0].address);
-                                $('#tel').val(editData[0].phone_no);
-                                $('#userId').val(editData[0].user_id);
-
-                            }
-                        });
+                $(document).on('click', '.edit_data', function() {
+                    var user_id = $(this).attr("id");
+                    $.ajax({
+                        url: "fetchData.php?method=listUser",
+                        method: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            // console.log(data);
+                            var editData = data.filter(item => {
+                                return item.user_id === user_id
+                            })
+                            // console.log(editData[0].firstname);
+                            $('#name').val(editData[0].firstname);
+                            $('#lastname').val(editData[0].lastname);
+                            $('#address').val(editData[0].address);
+                            $('#tel').val(editData[0].phone_no);
+                            $('#userId').val(editData[0].user_id);
+                        }
                     });
-
                 });
+
+            });
             </script>
 </body>
 
