@@ -36,8 +36,8 @@
     $dbName = "db_php_workshop";
 
     $conn = mysqli_connect($serverName, $userName, $userPassword, $dbName);
-
-    $sql = "SELECT * FROM receipt";
+    $user_IDID = $_SESSION['userId'];
+    $sql = "SELECT * FROM `receipt` INNER JOIN `order` USING(order_id) INNER JOIN user USING(user_id) WHERE user.user_id = '$user_IDID'";
 
     $query = mysqli_query($conn, $sql);
 
@@ -83,7 +83,7 @@
                 <form action="testBill.php" method="post">
                     <input type="hidden" value=<?php echo $result["receipt_id"]?> name="Bill_id">
                 <div align="center">
-                    <a href="testBill.php">
+                    <a href="testBill.php" target="_blank">
                     <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal" name="idOrder" >
                         Print
                     </button>

@@ -84,6 +84,14 @@ if (!empty($_SESSION['userId'])) {
   $db = new database;
   $result = $db->listProduct();
   $i = 0;
+  if(empty($_SESSION['selectProduct'])) $_SESSION['selectProduct'] = [];
+  $count_data = count($_SESSION['selectProduct']);
+
+  // $count_data = mysqli_num_rows($result);
+
+  // print_r($count_data);
+
+  // mysqli_data_seek($result, 0);
   // echo "<pre>";
   // print_r($_SESSION);
   // 	ini_set('display_errors', 1);
@@ -150,7 +158,7 @@ if (!empty($_SESSION['userId'])) {
                           <td><?= $value['product_name'] ?></td>
                           <td><?= $value['color'] ?></td>
                           <td><?= $value['size'] ?></td>
-                          <td class="text-center"><input required class="form-control text-right" type="number" name="qty[]" value="<?= $_SESSION['selectProduct'][$value['product_id']] ?>"></td>
+                          <td class="text-center"><input required min="1" class="form-control text-right" type="number" name="qty[]" value="<?= $_SESSION['selectProduct'][$value['product_id']] ?>"></td>
                           <?php foreach ($_SESSION['selectProduct'] as $k => $v) :
                                 if ($k == $value['product_id']) :
                                   ?>
@@ -223,7 +231,9 @@ if (!empty($_SESSION['userId'])) {
 
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success" value="submit" name="btnadd"> Submit </button>
+              <?php if($count_data > 0): ?>
+                <button type="submit" class="btn btn-success" value="submit" name="btnadd"> Submit </button>
+              <?php endif; ?>
               <!-- <input name="print" type="submit" id="print" value="Print" onClick="window.print()"/> -->
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>

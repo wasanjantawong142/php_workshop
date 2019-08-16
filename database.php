@@ -179,6 +179,9 @@ class database
             $total = $result['total'];
             $sql = "UPDATE `order` SET `total` = '$total' WHERE `order`.`order_id` = '$last_id'";
             $query = mysqli_query($conn, $sql);
+
+            $sql = "INSERT INTO `receipt` (`order_id`, `created_at`) VALUES ('$last_id', now());";
+            mysqli_query($conn, $sql);//insert Order
             // echo $sql . "<br>";
             mysqli_commit($conn);
             // exit("da");

@@ -25,7 +25,7 @@ session_start();
     $Bill_id = intval($_POST["Bill_id"]);
     $conn = mysqli_connect($serverName, $userName, $userPassword, $dbName);
 
-    $sql = "SELECT * FROM `receipt`,`order`,`user`,`order_detail`,`product` WHERE receipt.order_id= order.order_id AND order.user_id = user.user_id AND order.order_id = order_detail.order_id AND order_detail.product_id = product.product_id AND receipt.receipt_id ='$Bill_id'";
+    $sql = "SELECT product_name, brand, price, order_detail.qty AS qty, total  FROM `receipt`,`order`,`user`,`order_detail`,`product` WHERE receipt.order_id= order.order_id AND order.user_id = user.user_id AND order.order_id = order_detail.order_id AND order_detail.product_id = product.product_id AND receipt.receipt_id ='$Bill_id'";
 
 
     $query = mysqli_query($conn, $sql);
@@ -53,6 +53,12 @@ session_start();
                             <h4 align="left">263/13 99 99 99 99</h4>
                             <h4 align="left">Tel.096-8675648</h4>
                         </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            วันที่ 
+                            <?php echo date("d/m/Y"); ?>
                         </td>
                     </tr>
                     <tr class="success">
@@ -60,24 +66,33 @@ session_start();
                         <td align="center">รายการ</td>
                         <td align="center">จำนวน</td>
                         <td align="center">ราคาต่อหน่วย</td>
-                        <td align="center">ยอดรวม</td>
+                        <td align="center">จำนวนเงิน</td>
                     </tr>
                     <?php
                     $i = 1;
                     while ($result = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                        // echo "<pre>";
                         // print_r($result) ;
                         ?>
                     <tr>
                         <td align="center"><?php echo $i; ?></td>
                         <td align="center"><?php echo $result['product_name'] . " by " . $result['brand']; ?></td>
                         <td align="center"><?php echo $result['qty'] ?></td>
-                        <td align="center"><?php echo $result['price'] ?></td>
-                        <td align="center"><?php echo $result['total'] ?></td>
+                        <td align="center" class="text-right"><?php echo $result['price'] ?></td>
+                        <td align="center" class="text-right"><?php echo number_format($result['qty'] * $result['price'], 2) ?></td>
                     </tr>
                     <?php
                         $i++;
                     }
                     ?>
+                    <?php
+                    mysqli_data_seek($query, 0);
+                    $r = mysqli_fetch_array($query, MYSQLI_ASSOC);
+                    ?>
+                    <tr>
+                        <td colspan="4" class="text-center"><strong>ยอดรวมทั้งหมด</strong></td>
+                        <td class="text-right"><strong><?= number_format($r['total'], 2); ?></strong></td>
+                    </tr>
                 </table>
 
                 <div class="row text-center">
