@@ -50,7 +50,7 @@ $infor_product = $db->listProduct();
                             echo "<td>" . $row['price'] . "</td>";
                             echo "<td>" . $row['qty'] . " </td>";
                             echo "<td><button type='button' class='btn btn-warning edit_data' data-toggle='modal' data-target='#EditModal' id=" . $row['product_id'] . ">แก้ไข</button>";
-                            echo "<a href=adminProductManageDel.php?productId=" . $row['product_id'] . "><button type='button' class='btn btn-danger'>ลบ</button></td>";
+                            echo "<button type='button' class='btn btn-danger del_data' data-toggle='modal' data-target='#DeleteProduct' id=" . $row['product_id'] . ">ลบ</button></td>";
                             echo "</tr>";
                             $i++;
                         }
@@ -189,7 +189,31 @@ $infor_product = $db->listProduct();
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="DeleteProduct" tabindex="-1" role="dialog "
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Do you want delete?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="adminProductManageDel.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="productId" id="productIdDel">
 
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">OK</button></a>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <!-- content -->
 
             </div>
@@ -199,13 +223,13 @@ $infor_product = $db->listProduct();
             $('#example').DataTable();
             $(document).on('click', '.edit_data', function() {
                 var product_id = $(this).attr("id");
-                // console.log(product_id);
+                console.log(product_id);
                 $.ajax({
                     url: "fetchData.php?method=listProduct",
                     method: "GET",
                     dataType: "json",
                     success: function(data) {
-                        // console.log(data);
+                        console.log(data);
                         var editData = data.filter(item => {
                             return item.product_id === product_id
                         })
@@ -219,6 +243,27 @@ $infor_product = $db->listProduct();
                         $('#pQty').val(editData[0].qty);
                         $('#pPicture').val(editData[0].picture);
                         $('#productId').val(editData[0].product_id);
+                        $('#productIdDel').val(editData[0].product_id);
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $('#example').DataTable();
+            $(document).on('click', '.del_data', function() {
+                var product_id = $(this).attr("id");
+                console.log(product_id);
+                $.ajax({
+                    url: "fetchData.php?method=listProduct",
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log(data);
+                        var editData = data.filter(item => {
+                            return item.product_id === product_id
+                        })
+                        // console.log(editData[0].firstname);
+                        $('#productIdDel').val(editData[0].product_id);
                     }
                 });
             });
