@@ -160,8 +160,7 @@ class database
 
         $sql = "DELETE FROM `product` WHERE `product`.`product_id` = '$product_id'";
         $query = mysqli_query($conn, $sql);
-
-        if ($query) return $query;
+        if ($query) return $product_id;
         else return 0;
     }
 }
