@@ -9,7 +9,7 @@ class database
 
     public function connect_db()
     {
-        $serverName = "192.168.20.102"; //Database Server 
+        $serverName = "localhost"; //Database Server 
         $userName = "root"; // 
         $userPassword = "";
         $dbName = "db_php_workshop";
