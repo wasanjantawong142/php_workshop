@@ -140,8 +140,12 @@ class database
     {
         $conn = $this->connect_db();
 
-        $sql = "INSERT INTO product(`product_name`,`brand`,`type`,`color`,`size`,`price`,`qty`,`picture`)  VALUES ('$pName','$pBrand', '$pType','$pColor', '$pSize','$pPrice',  '$pQty', '$pPicture')";
+        $sql = "INSERT INTO product(`product_name`,`brand`,`type`,`color`,`size`,`price`,`qty`,`picture`, `product_status`)  VALUES ('$pName','$pBrand', '$pType','$pColor', '$pSize','$pPrice',  '$pQty', '$pPicture', '1')";
         $query = mysqli_query($conn, $sql);
+
+        // echo "<pre>55</pre>";
+
+        // exit;
 
         if ($query) return $query;
         else return 0;

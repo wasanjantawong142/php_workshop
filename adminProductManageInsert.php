@@ -27,6 +27,7 @@ if (isset($_FILES['pPicture'])) {
 $result_status = $db->insertProduct($pName, $pBrand, $pType, $pColor, $pSize, $pPrice, $pQty, $name_file);
 // echo "<pre>";
 // print_r($result_status);
+// exit;
 if ($result_status) header("Location: adminProductManage.php");
 else echo "update error";
 
