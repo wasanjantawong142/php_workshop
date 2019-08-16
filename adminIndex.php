@@ -5,6 +5,15 @@
     require_once "./database.php";
     $db = new database;
 
+    if (!empty($_SESSION['userId'])) {
+        if ($_SESSION['type'] === "user") header("Location: userIndex.php");
+        // else header("Location: userIndex.php");
+        exit;
+    } else {
+        header('Location: index.php');
+        exit;
+    }
+
 ?>
 
 <body>

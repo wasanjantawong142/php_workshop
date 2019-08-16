@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
-<?php include "./component/userHead.php"  ?>
+<?php 
+    include "./component/userHead.php";
+    if (!empty($_SESSION['userId'])) {
+        if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
+        // else header("Location: userIndex.php");
+        // exit;
+    } else {
+        header('Location: index.php');
+        // exit;
+    }
+?>
 
 
 <head>
@@ -141,7 +151,7 @@
                                                     <td><?= $value['color'] ?></td>
                                                     <td><?= $value['size'] ?></td>
                                                     <td class="text-center"><input required class="form-control text-right" type="number" name="qty[]" value="<?= $_SESSION['selectProduct'][$value['product_id']] ?>"></td>
-                                                    <td class="text-center"><a><i class="fa fa-trash text-danger" style="font-size: 1.5em;" aria-hidden="true"></i></td>
+                                                    <td class="text-center"><button type="button" class="btn btn-danger"><i class="fa fa-trash" style="font-size: 1.5em;" aria-hidden="true"></i></button></td>
 
                                                     <input type="hidden" value="<?= $value['product_id'] ?>" name="productId[]">
                                                 </tr>

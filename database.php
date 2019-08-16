@@ -1,31 +1,9 @@
 <?php
 class database
-{
-
+{   
     public function __construct()
     {
         if(empty($_SESSION)) session_start();
-
-        $conn = $this->connect_db();
-        mysqli_query($conn, "SET NAMES 'utf8'");
-        // $sda = [];
-        // print_r($_SESSION);
-        // exit;
-        // $this->checkTypeUser();
-    }
-
-    public function checkTypeUser()
-    {
-        if (!empty($_SESSION['userId'])) {
-            if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
-            else header("Location: userIndex.php");
-        }else{
-            // echo "<pre>";
-            // print_r($_SESSION);
-            // exit;
-            header('Location: index.php');
-            exit;
-        }
     }
 
     public function connect_db()

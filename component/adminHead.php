@@ -1,3 +1,16 @@
+<?php
+    session_start();
+
+    // if (!empty($_SESSION['userId'])) {
+    //     if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
+    //     else header("Location: userIndex.php");
+    //     exit;
+    // } else {
+    //     header('Location: index.php');
+    //     exit;
+    // }
+?>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

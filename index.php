@@ -1,14 +1,6 @@
 <!doctype html>
 <html lang="en">
 <?php include "./component/userHead.php"  ?>
-<?php
-if (!empty($_SESSION['userId'])) {
-    if ($_SESSION['type'] === "admin") header("Location: adminIndex.php");
-    else header("Location: userIndex.php");
-    exit;
-}
-
-?>
 
 <body>
     <div class="container h-100">
