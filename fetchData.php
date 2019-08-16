@@ -92,7 +92,10 @@ class database
 
         $sql = "SELECT * FROM product";
         $query = mysqli_query($conn, $sql);
-        $result = mysqli_fetch_all($query, MYSQLI_ASSOC);
+        $result = array();
+        while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+            $result[] = $row;
+        }
         if ($result) return $result;
         else return 0;
     }
@@ -114,22 +117,22 @@ class database
     }
 
 }
-    $db = new database;
-    $method = $_GET['method'];
+$db = new database;
+$method = $_GET['method'];
     // echo "<pre>";
-    switch ($method) {
-        case "listUser":
-            echo json_encode($db->listUser());
-            break;
-        case "blue":
-            echo "Your favorite color is blue!";
-            break;
-        case "green":
-            echo "Your favorite color is green!";
-            break;
-        default:
-            echo "Your favorite color is neither red, blue, nor green!";
-    }
+switch ($method) {
+    case "listUser":
+        echo json_encode($db->listUser());
+        break;
+    case "listProduct":
+        echo json_encode($db->listProduct());
+        break;
+    case "green":
+        echo "Your favorite color is green!";
+        break;
+    default:
+        echo "Your favorite color is neither red, blue, nor green!";
+}
 
     // echo "<pre>";
     // print_r($db->register('admin', 'dsad', 'q', '1', '1', 'address das', '0844065875'));

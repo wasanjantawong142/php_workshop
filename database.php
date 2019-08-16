@@ -134,8 +134,36 @@ class database
         if ($query) return $query;
         else return 0;
     }
+    public function insertProduct($pName, $pBrand, $pType, $pColor, $pSize, $pPrice, $pQty, $pPicture)
+    {
+        $conn = $this->connect_db();
 
+        $sql = "INSERT INTO product(`product_name`,`brand`,`type`,`color`,`size`,`price`,`qty`,`picture`)  VALUES ('$pName','$pBrand', '$pType','$pColor', '$pSize','$pPrice',  '$pQty', '$pPicture')";
+        $query = mysqli_query($conn, $sql);
 
+        if ($query) return $query;
+        else return 0;
+    }
+    public function updateProduct($pName, $pBrand, $pType, $pColor, $pSize, $pPrice, $pQty, $pPicture, $id)
+    {
+        $conn = $this->connect_db();
+
+        $sql = "UPDATE `product` SET `product_name` = '$pName', `brand` = '$pBrand', `type` = '$pType', `color` = '$pColor',`size` = '$pSize', `price` = '$pPrice', `qty` = '$pQty', `picture` = '$pPicture' WHERE `product`.`product_id` = '$id'";
+        $query = mysqli_query($conn, $sql);
+
+        if ($query) return $query;
+        else return 0;
+    }
+    public function delProduct($product_id)
+    {
+        $conn = $this->connect_db();
+
+        $sql = "DELETE FROM `product` WHERE `product`.`product_id` = '$product_id'";
+        $query = mysqli_query($conn, $sql);
+
+        if ($query) return $query;
+        else return 0;
+    }
 }
 
     // $db = new database;

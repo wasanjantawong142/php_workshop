@@ -5,7 +5,7 @@ include "./component/adminHead.php";
 require_once("./database.php");
 $db = new database;
 $infor_product = $db->listProduct();
-// print_r($infor_product);
+// print_r($infor_product[1]);
 ?>
 
 <body>
@@ -20,7 +20,7 @@ $infor_product = $db->listProduct();
                 <td style="margin-right:0px;"><button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#CreateProduct">เพิ่มสินค้า</button>
                 </td><br><br>
-                <table class="table" style="align:left">
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">No.</th>
@@ -32,6 +32,7 @@ $infor_product = $db->listProduct();
                             <th scope="col">รูปภาพ</th>
                             <th scope="col">ราคา</th>
                             <th scope="col">จำนวน</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,13 +49,14 @@ $infor_product = $db->listProduct();
                             echo "<td>" . $row['picture'] . " </td>";
                             echo "<td>" . $row['price'] . "</td>";
                             echo "<td>" . $row['qty'] . " </td>";
-                            echo "<td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#EditModal'>แก้ไข</button></td>";
-                            echo "<td><button type='button' class='btn btn-danger'>ลบ</button></td>";
+                            echo "<td><button type='button' class='btn btn-warning edit_data' data-toggle='modal' data-target='#EditModal' id=" . $row['product_id'] . ">แก้ไข</button>";
+                            echo "<a href=adminProductManageDel.php?productId=" . $row['product_id'] . "><button type='button' class='btn btn-danger'>ลบ</button></td>";
                             echo "</tr>";
                             $i++;
                         }
                         ?>
                     </tbody>
+
                 </table>
                 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog " aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
@@ -67,53 +69,52 @@ $infor_product = $db->listProduct();
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="adminProductManageSave.php" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md- 6">
                                             <label for="inputEmail4">ชื่อสินค้า</label>
-                                            <input type="text" class="form-control" name="pName" placeholder="Email">
+                                            <input type="text" class="form-control" name="pName" id="pName">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">แบรนด์</label>
-                                            <input type="text" class="form-control" name="pBrand"
-                                                placeholder="Password">
+                                            <input type="text" class="form-control" name="pBrand" id="pBrand"
+                                                placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">รุ่น</label>
-                                            <input type="text" class="form-control" name="pType " placeholder="Email">
+                                            <input type="text" class="form-control" name="pType" id="pType"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label for="inputState">ไซต์</label>
-                                            <select id="pSize" class="form-control">
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
-                                            </select>
+                                            <label for="inputEmail4">ไซต์</label>
+                                            <input type="text" class="form-control" name="pSize" id="pSize"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">สี</label>
-                                            <input type="text" class="form-control" name="pColor" placeholder="Email">
+                                            <input type="text" class="form-control" name="pColor" id="pColor"
+                                                placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">ราคา</label>
-                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
+                                            <input type="text " class="form-control" name="pPrice" id="pPrice"
+                                                placeholder="">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">จำนวน</label>
-                                            <input type="text" class="form-control" name="pQty" placeholder="Password">
+                                            <input type="text" class="form-control" name="pQty" id="pQty"
+                                                placeholder="">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleFormControlFile1">เลือกรูปภาพใหม่</label>
-                                        <input type="file" class="form-control-file" name="pPicture">
+                                        <input type="file" class="form-control-file" name="pPicture" id="pPicture">
                                     </div>
-
+                                    <input type="hidden" name="productId" id="productId">
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
@@ -136,50 +137,44 @@ $infor_product = $db->listProduct();
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="adminProductManageInsert.php" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md- 6">
                                             <label for="inputEmail4">ชื่อสินค้า</label>
-                                            <input type="text" class="form-control" name="pName" placeholder="Email">
+                                            <input type="text" class="form-control" name="pName"
+                                                placeholder="ชื่อสินค้า">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">แบรนด์</label>
-                                            <input type="text" class="form-control" name="pBrand"
-                                                placeholder="Password">
+                                            <input type="text" class="form-control" name="pBrand" placeholder="แบรนด์">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">รุ่น</label>
-                                            <input type="text" class="form-control" name="pType " placeholder="Email">
+                                            <input type="text" class="form-control" name="pType" placeholder="รุ่น">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputState">ไซต์</label>
-                                            <select id="pSize" class="form-control">
-                                                <option value="S">S</option>
-                                                <option value="M">M</option>
-                                                <option value="L">L</option>
-                                                <option value="XL">XL</option>
-                                                <option value="XXL">XXL</option>
-                                            </select>
+                                            <input type="text" class="form-control" name="pSize" placeholder="ไซต์">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label for="inputEmail4">สี</label>
-                                            <input type="text" class="form-control" name="pColor" placeholder="Email">
+                                            <input type="text" class="form-control" name="pColor" placeholder="สี">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">ราคา</label>
-                                            <input type="text " class="form-control" name="pPrice" placeholder="Email">
+                                            <input type="text " class="form-control" name="pPrice" placeholder="ราคา">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputPassword4">จำนวน</label>
-                                            <input type="text" class="form-control" name="pQty" placeholder="Password">
+                                            <input type="text" class="form-control" name="pQty" placeholder="จำนวน">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlFile1">เลือกรูปภาพใหม่</label>
+                                        <label for="exampleFormControlFile1">เลือกรูปภาพ</label>
                                         <input type="file" class="form-control-file" name="pPicture">
                                     </div>
 
@@ -199,6 +194,38 @@ $infor_product = $db->listProduct();
 
             </div>
         </div>
+        <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+            $(document).on('click', '.edit_data', function() {
+                var product_id = $(this).attr("id");
+                // console.log(product_id);
+                $.ajax({
+                    url: "fetchData.php?method=listProduct",
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        // console.log(data);
+                        var editData = data.filter(item => {
+                            return item.product_id === product_id
+                        })
+                        // console.log(editData[0].firstname);
+                        $('#pName').val(editData[0].product_name);
+                        $('#pBrand').val(editData[0].brand);
+                        $('#pType').val(editData[0].type);
+                        $('#pColor').val(editData[0].color);
+                        $('#pSize').val(editData[0].size);
+                        $('#pPrice').val(editData[0].price);
+                        $('#pQty').val(editData[0].qty);
+                        $('#pPicture').val(editData[0].picture);
+                        $('#productId').val(editData[0].product_id);
+                    }
+                });
+            });
+
+        });
+        </script>
+</body>
 </body>
 
 </html>
